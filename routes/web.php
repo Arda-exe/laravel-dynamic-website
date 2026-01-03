@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
@@ -22,9 +23,12 @@ Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show');
 // Public FAQ Route
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
+// Public Contact Routes
+Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 // Placeholder routes (to be implemented)
 Route::get('/forum', fn() => view('welcome'))->name('forum.index');
-Route::get('/contact', fn() => view('welcome'))->name('contact.create');
 Route::get('/user/{user}', fn() => view('welcome'))->name('profile.show');
 Route::get('/messages', fn() => view('welcome'))->name('messages.index');
 
