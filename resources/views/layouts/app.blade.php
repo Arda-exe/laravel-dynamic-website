@@ -14,8 +14,8 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased text-slate-200">
-        <div class="min-h-screen">
+    <body class="antialiased text-slate-200 flex flex-col min-h-screen">
+        <div class="flex flex-col flex-grow">
             <x-navbar />
 
             <!-- Flash Messages -->
@@ -39,20 +39,20 @@
             @endisset
 
             <!-- Page Content -->
-            <main class="py-12">
+            <main class="py-12 flex-grow">
                 {{ $slot }}
             </main>
-
-            <!-- Footer -->
-            <footer class="elden-border mt-8 bg-slate-950/50 backdrop-blur-sm">
-                <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-                    <div class="text-center">
-                        <p class="text-amber-400/70 text-sm font-light">
-                            &copy; {{ date('Y') }} Elden Ring Forum. Rise, Tarnished.
-                        </p>
-                    </div>
-                </div>
-            </footer>
         </div>
+
+        <!-- Footer -->
+        <footer class="elden-border mt-auto bg-slate-950/50 backdrop-blur-sm">
+            <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <p class="text-amber-400/70 text-sm font-light">
+                        &copy; {{ date('Y') }} Elden Ring Forum. Rise, Tarnished.
+                    </p>
+                </div>
+            </div>
+        </footer>
     </body>
 </html>
