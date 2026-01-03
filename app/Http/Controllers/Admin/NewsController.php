@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNewsRequest;
+use App\Http\Requests\UpdateNewsRequest;
 use App\Models\NewsArticle;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class NewsController extends Controller
@@ -20,15 +21,9 @@ class NewsController extends Controller
         return view('admin.news.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreNewsRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'excerpt' => 'required',
-            'content' => 'required',
-            'image' => 'nullable|image|max:2048',
-            'is_published' => 'boolean',
-        ]);
+        $validated = $request->validated();
 
         $validated['slug'] = Str::slug($validated['title']);
         $validated['user_id'] = auth()->id();
@@ -45,18 +40,12 @@ class NewsController extends Controller
 
     public function edit(NewsArticle $news)
     {
-        return view('admin.news.edit', compact('news'));
+        return view('admin.news.edit', ['article' => $news]);
     }
 
-    public function update(Request $request, NewsArticle $news)
+    public function update(UpdateNewsRequest $request, NewsArticle $news)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'excerpt' => 'required',
-            'content' => 'required',
-            'image' => 'nullable|image|max:2048',
-            'is_published' => 'boolean',
-        ]);
+        $validated = $request->validated();
 
         $validated['slug'] = Str::slug($validated['title']);
         $validated['published_at'] = $request->is_published ? ($news->published_at ?? now()) : null;
