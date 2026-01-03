@@ -1,6 +1,6 @@
 @props(['article'])
 
-<article class="elden-card overflow-hidden group">
+<article class="elden-card overflow-hidden group flex flex-col h-full">
     @if($article->image)
         <div class="relative overflow-hidden h-56">
             <img src="{{ asset('storage/' . $article->image) }}"
@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <div class="p-6">
+    <div class="p-6 flex-grow">
         <h3 class="text-2xl font-bold mb-3 elden-text-gold" style="font-family: 'Cinzel', serif;">
             <a href="{{ route('news.show', $article->slug) }}" class="hover:text-amber-300 transition-colors">
                 {{ $article->title }}
@@ -38,10 +38,12 @@
             </span>
         </div>
 
-        <p class="text-slate-300 mb-6 leading-relaxed line-clamp-3">
+        <p class="text-slate-300 leading-relaxed line-clamp-3">
             {{ $article->excerpt }}
         </p>
+    </div>
 
+    <div class="p-6 pt-0">
         <a href="{{ route('news.show', $article->slug) }}" class="elden-button inline-flex items-center gap-2">
             <span>Read More</span>
             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

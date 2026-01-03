@@ -44,7 +44,7 @@
             </main>
 
             <!-- Footer -->
-            <footer class="elden-border mt-16 bg-slate-950/50 backdrop-blur-sm">
+            <footer class="elden-border mt-8 bg-slate-950/50 backdrop-blur-sm">
                 <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
                     <div class="text-center">
                         <p class="text-amber-400/70 text-sm font-light">
