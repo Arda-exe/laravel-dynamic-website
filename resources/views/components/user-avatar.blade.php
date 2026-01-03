@@ -9,10 +9,19 @@
     ];
 
     $sizeClass = $sizes[$size] ?? $sizes['md'];
-    $photoUrl = $user->photo ? asset('storage/' . $user->photo) : asset('images/default-avatar.png');
+    $name = $user->username ?? $user->name;
+
+    // If user has uploaded photo, use it; otherwise use a random default avatar
+    if ($user->photo) {
+        $photoUrl = asset('storage/' . $user->photo);
+    } else {
+        // Use user ID to consistently pick the same avatar for each user
+        $avatarNumber = ($user->id % 10) + 1;
+        $photoUrl = asset("images/avatars/pfp{$avatarNumber}.webp");
+    }
 @endphp
 
 <img src="{{ $photoUrl }}"
-     alt="{{ $user->username ?? $user->name }}"
-     class="rounded-full {{ $sizeClass }} object-cover border-2 border-yellow-600"
-     onerror="this.src='{{ asset('images/default-avatar.png') }}'">
+     alt="{{ $name }}"
+     class="rounded-full {{ $sizeClass }} object-cover border-2 border-amber-600 shadow-lg"
+     onerror="this.src='{{ asset('images/avatars/pfp1.webp') }}'">
