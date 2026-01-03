@@ -17,6 +17,13 @@ Route::get('/dashboard', function () {
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show');
 
+// Placeholder routes (to be implemented)
+Route::get('/forum', fn() => view('welcome'))->name('forum.index');
+Route::get('/faq', fn() => view('welcome'))->name('faq.index');
+Route::get('/contact', fn() => view('welcome'))->name('contact.create');
+Route::get('/user/{user}', fn() => view('welcome'))->name('profile.show');
+Route::get('/messages', fn() => view('welcome'))->name('messages.index');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
