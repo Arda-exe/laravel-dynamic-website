@@ -9,12 +9,12 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|merriweather:300,400,700&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-gray-900 text-gray-100">
+    <body class="antialiased text-slate-200">
         <div class="min-h-screen">
             <x-navbar />
 
@@ -29,9 +29,9 @@
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-gray-800 shadow-lg border-b-2 border-yellow-600">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        <h1 class="text-3xl font-bold text-yellow-500" style="font-family: 'Cinzel', serif;">
+                <header class="bg-slate-950/80 backdrop-blur-sm shadow-2xl border-b border-amber-900/20">
+                    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+                        <h1 class="text-4xl font-bold elden-title">
                             {{ $header }}
                         </h1>
                     </div>
@@ -39,14 +39,18 @@
             @endisset
 
             <!-- Page Content -->
-            <main class="py-8">
+            <main class="py-12">
                 {{ $slot }}
             </main>
 
             <!-- Footer -->
-            <footer class="bg-gray-800 border-t-2 border-yellow-600 mt-12">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-                    <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+            <footer class="elden-border mt-16 bg-slate-950/50 backdrop-blur-sm">
+                <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                        <p class="text-amber-400/70 text-sm font-light">
+                            &copy; {{ date('Y') }} Elden Ring Forum. Rise, Tarnished.
+                        </p>
+                    </div>
                 </div>
             </footer>
         </div>

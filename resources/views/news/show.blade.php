@@ -3,37 +3,46 @@
         {{ $article->title }}
     </x-slot>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <article class="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-yellow-600">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <article class="elden-card overflow-hidden">
             @if($article->image)
-                <img src="{{ asset('storage/' . $article->image) }}"
-                     alt="{{ $article->title }}"
-                     class="w-full h-96 object-cover">
+                <div class="relative h-[500px] overflow-hidden">
+                    <img src="{{ asset('storage/' . $article->image) }}"
+                         alt="{{ $article->title }}"
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent"></div>
+                </div>
             @endif
 
-            <div class="p-8">
-                <div class="flex items-center mb-6">
-                    <x-user-avatar :user="$article->user" size="md" />
-                    <div class="ml-4">
-                        <p class="text-gray-300 font-medium">
+            <div class="p-10">
+                <div class="flex items-center gap-4 mb-8 pb-6 border-b border-amber-900/20">
+                    <x-user-avatar :user="$article->user" size="lg" />
+                    <div>
+                        <p class="text-amber-400 font-semibold text-lg">
                             {{ $article->user->username ?? $article->user->name }}
                         </p>
-                        <p class="text-gray-400 text-sm">
+                        <p class="text-slate-400 text-sm flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
                             {{ $article->published_at->format('F j, Y \a\t g:i A') }}
                         </p>
                     </div>
                 </div>
 
-                <div class="prose prose-invert prose-yellow max-w-none">
-                    <div class="text-gray-300 leading-relaxed">
+                <div class="prose prose-lg prose-invert max-w-none">
+                    <div class="text-slate-200 leading-relaxed text-lg space-y-4">
                         {!! nl2br(e($article->content)) !!}
                     </div>
                 </div>
 
-                <div class="mt-8 pt-6 border-t border-gray-700">
+                <div class="mt-12 pt-8 elden-border">
                     <a href="{{ route('news.index') }}"
-                       class="inline-block bg-gray-700 hover:bg-gray-600 text-yellow-500 font-bold py-2 px-4 rounded transition-colors">
-                        ← Back to News
+                       class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 font-medium transition-colors group">
+                        <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                        <span>Back to News</span>
                     </a>
                 </div>
             </div>
