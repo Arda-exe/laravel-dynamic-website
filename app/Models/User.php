@@ -64,6 +64,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the comments created by the user.
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
      * Get the roles that belong to the user.
      */
     public function roles(): BelongsToMany
