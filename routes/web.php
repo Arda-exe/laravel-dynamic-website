@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ForumCategoryController;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\ForumReplyController;
 use App\Http\Controllers\ForumThreadController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
@@ -58,6 +59,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/forum/threads/{thread}/edit', [ForumThreadController::class, 'edit'])->name('forum.threads.edit');
     Route::patch('/forum/threads/{thread}', [ForumThreadController::class, 'update'])->name('forum.threads.update');
     Route::delete('/forum/threads/{thread}', [ForumThreadController::class, 'destroy'])->name('forum.threads.destroy');
+
+    // Forum Reply Routes
+    Route::post('/forum/threads/{thread}/replies', [ForumReplyController::class, 'store'])->name('forum.replies.store');
+    Route::delete('/forum/replies/{reply}', [ForumReplyController::class, 'destroy'])->name('forum.replies.destroy');
 });
 
 // Admin Routes
