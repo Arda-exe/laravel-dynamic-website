@@ -40,7 +40,7 @@
 
             <!-- Page Content -->
             <main class="py-12 flex-grow">
-                {{ $slot }}
+                @yield('content')
             </main>
         </div>
 
