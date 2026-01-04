@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ForumCategoryController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
@@ -34,6 +35,7 @@ Route::get('/user/{user}', [ProfileController::class, 'show'])->name('profile.sh
 
 // Public Forum Routes
 Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
+Route::get('/forum/category/{slug}', [ForumCategoryController::class, 'show'])->name('forum.category.show');
 
 // Placeholder routes (to be implemented)
 Route::get('/messages', fn() => view('welcome'))->name('messages.index');
