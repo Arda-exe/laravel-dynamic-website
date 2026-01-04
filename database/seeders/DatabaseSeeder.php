@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             FaqCategorySeeder::class,
             FaqSeeder::class,
             ForumCategorySeeder::class,
+            ForumThreadSeeder::class,
         ]);
     }
 }
