@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ForumCategoryController;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\ForumThreadController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,7 @@ Route::get('/user/{user}', [ProfileController::class, 'show'])->name('profile.sh
 // Public Forum Routes
 Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forum/category/{slug}', [ForumCategoryController::class, 'show'])->name('forum.category.show');
+Route::get('/forum/threads/{slug}', [ForumThreadController::class, 'show'])->name('forum.threads.show');
 
 // Placeholder routes (to be implemented)
 Route::get('/messages', fn() => view('welcome'))->name('messages.index');
@@ -49,6 +51,13 @@ Route::middleware('auth')->group(function () {
     // Comment Routes
     Route::post('/news/{article}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+    // Forum Thread Routes
+    Route::get('/forum/threads/create', [ForumThreadController::class, 'create'])->name('forum.threads.create');
+    Route::post('/forum/threads', [ForumThreadController::class, 'store'])->name('forum.threads.store');
+    Route::get('/forum/threads/{thread}/edit', [ForumThreadController::class, 'edit'])->name('forum.threads.edit');
+    Route::patch('/forum/threads/{thread}', [ForumThreadController::class, 'update'])->name('forum.threads.update');
+    Route::delete('/forum/threads/{thread}', [ForumThreadController::class, 'destroy'])->name('forum.threads.destroy');
 });
 
 // Admin Routes
