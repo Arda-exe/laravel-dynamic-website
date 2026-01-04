@@ -3,7 +3,7 @@
         Contact Us
     </x-slot>
 
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="elden-card p-8">
             <p class="text-slate-300 mb-8">
                 Have a question or feedback? Send us a message and we'll get back to you as soon as possible.

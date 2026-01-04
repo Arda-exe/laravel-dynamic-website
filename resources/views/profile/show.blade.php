@@ -3,7 +3,7 @@
         {{ $user->username ?? $user->name }}'s Profile
     </x-slot>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="elden-card p-8">
             <div class="flex items-start gap-8">
                 <div class="flex-shrink-0">

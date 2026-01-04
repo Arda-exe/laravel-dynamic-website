@@ -3,7 +3,7 @@
         {{ $category->name }}
     </x-slot>
 
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="mb-6 flex items-center justify-between">
             <a href="{{ route('forum.index') }}" class="text-amber-400 hover:text-amber-300">
                 ← Back to Forum

@@ -3,7 +3,7 @@
         Create New Thread
     </x-slot>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="elden-card p-8">
             <form method="POST" action="{{ route('forum.threads.store') }}">
                 @csrf
