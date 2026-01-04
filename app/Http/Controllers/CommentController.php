@@ -25,10 +25,7 @@ class CommentController extends Controller
 
     public function destroy(Comment $comment)
     {
-        // Only allow the comment owner or admin to delete
-        if (auth()->id() !== $comment->user_id && !auth()->user()->isAdmin()) {
-            return redirect()->back()->with('error', 'You are not authorized to delete this comment.');
-        }
+        $this->authorize('delete', $comment);
 
         $articleSlug = $comment->newsArticle->slug;
         $comment->delete();
