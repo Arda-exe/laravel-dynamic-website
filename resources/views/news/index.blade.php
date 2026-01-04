@@ -3,7 +3,7 @@
         News & Updates
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         @if($articles->isEmpty())
             <div class="text-center py-12">
                 <p class="text-gray-400 text-lg">No news articles available yet.</p>

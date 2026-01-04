@@ -3,7 +3,7 @@
         Frequently Asked Questions
     </x-slot>
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         @if($categories->isEmpty())
             <div class="elden-card p-12 text-center">
                 <p class="text-slate-400 text-lg">No FAQ categories available yet.</p>

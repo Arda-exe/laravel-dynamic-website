@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased text-slate-200 flex flex-col min-h-screen">
+    <body class="antialiased text-slate-200 flex flex-col min-h-screen" style="background-image: linear-gradient(to bottom, rgba(2, 6, 23, 0.85), rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.85)), url('{{ asset('images/wallpaper.png') }}'); background-attachment: fixed; background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div class="flex flex-col flex-grow">
             <x-navbar />
 
@@ -39,8 +39,12 @@
             @endisset
 
             <!-- Page Content -->
-            <main class="py-12 flex-grow">
-                {{ $slot }}
+            <main class="flex-grow">
+                @isset($slot)
+                    {{ $slot }}
+                @else
+                    @yield('content')
+                @endisset
             </main>
         </div>
 

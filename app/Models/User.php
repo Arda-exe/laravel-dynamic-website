@@ -88,6 +88,22 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the forum threads created by the user.
+     */
+    public function forumThreads(): HasMany
+    {
+        return $this->hasMany(ForumThread::class);
+    }
+
+    /**
+     * Get the forum replies created by the user.
+     */
+    public function forumReplies(): HasMany
+    {
+        return $this->hasMany(ForumReply::class);
+    }
+
+    /**
      * Check if the user is an admin.
      */
     public function isAdmin(): bool
