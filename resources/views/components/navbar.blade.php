@@ -4,12 +4,12 @@
             <!-- Logo and Main Navigation -->
             <div class="flex items-center">
                 <div class="flex-shrink-0">
-                    <a href="{{ url('/') }}" class="text-3xl font-bold elden-text-gold hover:text-amber-300 transition-colors" style="font-family: 'Cinzel', serif;">
+                    <a href="{{ route('home') }}" class="text-3xl font-bold elden-text-gold hover:text-amber-300 transition-colors" style="font-family: 'Cinzel', serif;">
                         {{ config('app.name') }}
                     </a>
                 </div>
                 <div class="hidden sm:ml-10 sm:flex sm:space-x-1">
-                    <a href="{{ url('/') }}" class="text-slate-300 hover:text-amber-400 hover:bg-slate-900/50 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md transition-all">
+                    <a href="{{ route('home') }}" class="text-slate-300 hover:text-amber-400 hover:bg-slate-900/50 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md transition-all">
                         Home
                     </a>
                     <a href="{{ route('news.index') }}" class="text-slate-300 hover:text-amber-400 hover:bg-slate-900/50 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md transition-all">
