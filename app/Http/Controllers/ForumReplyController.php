@@ -24,7 +24,7 @@ class ForumReplyController extends Controller
 
         ForumReply::create($validated);
 
-        return redirect()->route('forum.threads.show', $thread->slug)
+        return redirect()->route('forum.threads.show', $thread)
             ->with('success', 'Reply posted successfully.');
     }
 
@@ -32,10 +32,10 @@ class ForumReplyController extends Controller
     {
         $this->authorize('delete', $reply);
 
-        $threadSlug = $reply->thread->slug;
+        $thread = $reply->thread;
         $reply->delete();
 
-        return redirect()->route('forum.threads.show', $threadSlug)
+        return redirect()->route('forum.threads.show', $thread)
             ->with('success', 'Reply deleted successfully.');
     }
 }

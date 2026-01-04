@@ -12,7 +12,6 @@ class ForumThread extends Model
         'forum_category_id',
         'user_id',
         'title',
-        'slug',
         'content',
         'is_pinned',
         'is_locked',

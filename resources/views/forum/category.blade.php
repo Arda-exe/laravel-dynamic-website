@@ -43,7 +43,7 @@
                             <div class="flex-grow min-w-0">
                                 <div class="flex items-start justify-between gap-4">
                                     <div class="flex-grow min-w-0">
-                                        <a href="{{ route('forum.threads.show', $thread->slug) }}" class="block group">
+                                        <a href="{{ route('forum.threads.show', $thread) }}" class="block group">
                                             <h3 class="text-lg font-bold text-amber-400 group-hover:text-amber-300 transition-colors mb-1">
                                                 @if($thread->is_pinned)
                                                     <span class="text-amber-600">📌</span>

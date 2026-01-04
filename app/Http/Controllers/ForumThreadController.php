@@ -6,7 +6,6 @@ use App\Models\ForumCategory;
 use App\Models\ForumThread;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ForumThreadController extends Controller
@@ -29,19 +28,16 @@ class ForumThreadController extends Controller
         ]);
 
         $validated['user_id'] = auth()->id();
-        $validated['slug'] = Str::slug($validated['title']) . '-' . Str::random(8);
 
         $thread = ForumThread::create($validated);
 
-        return redirect()->route('forum.threads.show', $thread->slug)
+        return redirect()->route('forum.threads.show', $thread)
             ->with('success', 'Thread created successfully.');
     }
 
-    public function show(string $slug): View
+    public function show(ForumThread $thread): View
     {
-        $thread = ForumThread::with(['user', 'category'])
-            ->where('slug', $slug)
-            ->firstOrFail();
+        $thread->load(['user', 'category']);
 
         $replies = $thread->replies()
             ->with('user')
@@ -72,7 +68,7 @@ class ForumThreadController extends Controller
 
         $thread->update($validated);
 
-        return redirect()->route('forum.threads.show', $thread->slug)
+        return redirect()->route('forum.threads.show', $thread)
             ->with('success', 'Thread updated successfully.');
     }
 

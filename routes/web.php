@@ -38,7 +38,7 @@ Route::get('/user/{user}', [ProfileController::class, 'show'])->name('profile.sh
 // Public Forum Routes
 Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forum/category/{slug}', [ForumCategoryController::class, 'show'])->name('forum.category.show');
-Route::get('/forum/threads/{slug}', [ForumThreadController::class, 'show'])->name('forum.threads.show');
+Route::get('/forum/threads/{thread}', [ForumThreadController::class, 'show'])->name('forum.threads.show');
 
 // Placeholder routes (to be implemented)
 Route::get('/messages', fn() => view('welcome'))->name('messages.index');

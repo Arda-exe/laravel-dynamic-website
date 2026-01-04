@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="flex items-center justify-end gap-4">
-                    <a href="{{ route('forum.threads.show', $thread->slug) }}" class="text-slate-400 hover:text-slate-300">
+                    <a href="{{ route('forum.threads.show', $thread) }}" class="text-slate-400 hover:text-slate-300">
                         Cancel
                     </a>
                     <button type="submit" class="elden-button">

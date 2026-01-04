@@ -34,12 +34,6 @@ class ForumCategorySeeder extends Seeder
                 'description' => 'Dive deep into the lore, share theories, and discuss the story',
                 'order' => 4,
             ],
-            [
-                'name' => 'Multiplayer & Trading',
-                'slug' => 'multiplayer-trading',
-                'description' => 'Find co-op partners, arrange PvP matches, and trade items',
-                'order' => 5,
-            ],
         ];
 
         foreach ($categories as $category) {
