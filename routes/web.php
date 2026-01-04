@@ -28,14 +28,17 @@ Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+// Public Profile Route
+Route::get('/user/{user}', [ProfileController::class, 'show'])->name('profile.show');
+
 // Placeholder routes (to be implemented)
 Route::get('/forum', fn() => view('welcome'))->name('forum.index');
-Route::get('/user/{user}', fn() => view('welcome'))->name('profile.show');
 Route::get('/messages', fn() => view('welcome'))->name('messages.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.updatePhoto');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Comment Routes
