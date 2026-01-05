@@ -19,10 +19,6 @@ class RoleSeeder extends Seeder
                 'description' => 'Administrator with full access',
             ],
             [
-                'name' => 'moderator',
-                'description' => 'Moderator with content management access',
-            ],
-            [
                 'name' => 'user',
                 'description' => 'Regular user',
             ],
