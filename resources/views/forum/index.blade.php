@@ -11,7 +11,7 @@
         @else
             <div class="space-y-4">
                 @foreach($categories as $category)
-                    <div class="elden-card p-6 hover:shadow-2xl transition-shadow">
+                    <div class="elden-card p-6">
                         <a href="{{ route('forum.category.show', $category->slug) }}" class="block">
                             <div class="flex items-start justify-between">
                                 <div class="flex-grow">

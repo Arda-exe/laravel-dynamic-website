@@ -12,7 +12,7 @@
             <a href="{{ route('news.index') }}" class="elden-button">
                 Latest News
             </a>
-            <a href="{{ route('forum.index') }}" class="bg-slate-700 hover:bg-slate-600 text-amber-400 font-bold py-2 px-6 rounded-md border-2 border-amber-900/50 transition duration-300 shadow-lg">
+            <a href="{{ route('forum.index') }}" class="bg-slate-700 hover:bg-slate-600 text-amber-400 font-bold py-2 px-6 rounded border-2 border-amber-900/50 transition duration-300">
                 Browse Forum
             </a>
         </div>
@@ -70,7 +70,7 @@
         @if($latest_threads->count() > 0)
             <div class="elden-card divide-y divide-slate-700">
                 @foreach($latest_threads as $thread)
-                    <div class="p-5 hover:bg-slate-750 transition">
+                    <div class="p-5">
                         <div class="flex items-start justify-between">
                             <div class="flex-1">
                                 <div class="flex items-center gap-2 mb-2">
@@ -122,7 +122,7 @@
                 <a href="{{ route('register') }}" class="elden-button">
                     Register Now
                 </a>
-                <a href="{{ route('login') }}" class="bg-slate-700 hover:bg-slate-600 text-amber-400 font-bold py-2 px-6 rounded-md border-2 border-amber-900/50 transition duration-300 shadow-lg">
+                <a href="{{ route('login') }}" class="bg-slate-700 hover:bg-slate-600 text-amber-400 font-bold py-2 px-6 rounded border-2 border-amber-900/50 transition duration-300">
                     Login
                 </a>
             </div>

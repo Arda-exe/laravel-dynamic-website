@@ -34,7 +34,7 @@
         @else
             <div class="space-y-3">
                 @foreach($threads as $thread)
-                    <div class="elden-card p-5 hover:shadow-2xl transition-shadow {{ $thread->is_pinned ? 'border-2 border-amber-600/50' : '' }}">
+                    <div class="elden-card p-5 {{ $thread->is_pinned ? 'border-2 border-amber-600/50' : '' }}">
                         <div class="flex items-start gap-4">
                             <div class="flex-shrink-0">
                                 <x-user-avatar :user="$thread->user" size="md" />
