@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ContactSubmissionController as AdminContactSubmissionController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
@@ -70,6 +71,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('news', AdminNewsController::class);
+
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
+    Route::patch('/users/{user}', [AdminUserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
 
     Route::get('/contact-submissions', [AdminContactSubmissionController::class, 'index'])->name('contact-submissions.index');
     Route::get('/contact-submissions/{contactSubmission}', [AdminContactSubmissionController::class, 'show'])->name('contact-submissions.show');
