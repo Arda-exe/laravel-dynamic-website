@@ -22,14 +22,12 @@ class DashboardController extends Controller
             'total_comments' => Comment::count(),
             'total_threads' => ForumThread::count(),
             'total_replies' => ForumReply::count(),
-            'unread_messages' => ContactSubmission::where('is_read', false)->count(),
         ];
 
         $recent_users = User::latest()->take(5)->get();
         $recent_news = NewsArticle::with('user')->latest()->take(5)->get();
         $recent_threads = ForumThread::with(['user', 'category'])->latest()->take(5)->get();
-        $recent_messages = ContactSubmission::where('is_read', false)->latest()->take(5)->get();
 
-        return view('admin.dashboard', compact('stats', 'recent_users', 'recent_news', 'recent_threads', 'recent_messages'));
+        return view('admin.dashboard', compact('stats', 'recent_users', 'recent_news', 'recent_threads'));
     }
 }

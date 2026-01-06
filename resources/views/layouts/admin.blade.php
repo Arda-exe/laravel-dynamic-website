@@ -70,7 +70,11 @@
 
                     <!-- Page Content -->
                     <main class="p-8">
-                        {{ $slot }}
+                        @isset($slot)
+                            {{ $slot }}
+                        @else
+                            @yield('content')
+                        @endisset
                     </main>
                 </div>
             </div>

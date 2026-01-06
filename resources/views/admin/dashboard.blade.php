@@ -5,7 +5,7 @@
     <h1 class="text-3xl font-bold text-amber-400 mb-8">Admin Dashboard</h1>
 
     <!-- Statistics Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <div class="bg-slate-800 border border-amber-900/30 rounded-lg p-6">
             <div class="flex items-center justify-between">
                 <div>
@@ -38,18 +38,6 @@
                 </div>
                 <svg class="w-12 h-12 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-                </svg>
-            </div>
-        </div>
-
-        <div class="bg-slate-800 border border-amber-900/30 rounded-lg p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-slate-400 text-sm">Unread Messages</p>
-                    <p class="text-3xl font-bold text-amber-400">{{ $stats['unread_messages'] }}</p>
-                </div>
-                <svg class="w-12 h-12 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
             </div>
         </div>
@@ -136,25 +124,6 @@
                     </div>
                 @empty
                     <p class="text-slate-400 text-center py-4">No recent threads</p>
-                @endforelse
-            </div>
-        </div>
-
-        <!-- Unread Contact Messages -->
-        <div class="bg-slate-800 border border-amber-900/30 rounded-lg p-6">
-            <h2 class="text-xl font-bold text-amber-400 mb-4">Unread Contact Messages</h2>
-            <div class="space-y-3">
-                @forelse($recent_messages as $message)
-                    <div class="py-2 border-b border-slate-700 last:border-0">
-                        <a href="{{ route('admin.contact-submissions.show', $message) }}" class="text-slate-200 hover:text-amber-400 font-medium">
-                            {{ $message->subject }}
-                        </a>
-                        <p class="text-xs text-slate-400 mt-1">
-                            from {{ $message->name }} • {{ $message->created_at->diffForHumans() }}
-                        </p>
-                    </div>
-                @empty
-                    <p class="text-slate-400 text-center py-4">No unread messages</p>
                 @endforelse
             </div>
         </div>
