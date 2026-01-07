@@ -52,7 +52,7 @@
         <div class="mt-8">
             <div class="elden-card p-8">
                 <h2 class="text-2xl font-bold mb-6 elden-text-gold" style="font-family: 'Cinzel', serif;">
-                    Comments ({{ $article->comments->count() }})
+                    Comments ({{ $article->comments()->count() }})
                 </h2>
 
                 @auth
@@ -87,7 +87,7 @@
 
                 <!-- Comments List -->
                 <div class="space-y-4">
-                    @forelse($article->comments()->with('user')->latest()->get() as $comment)
+                    @forelse($comments as $comment)
                         <x-comment-item :comment="$comment" />
                     @empty
                         <p class="text-center text-slate-400 py-8">
@@ -95,6 +95,12 @@
                         </p>
                     @endforelse
                 </div>
+
+                @if($comments->hasPages())
+                    <div class="mt-6">
+                        {{ $comments->links() }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>

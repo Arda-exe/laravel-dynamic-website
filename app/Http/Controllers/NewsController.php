@@ -31,6 +31,11 @@ class NewsController extends Controller
             ->published()
             ->firstOrFail();
 
-        return view('news.show', compact('article'));
+        $comments = $article->comments()
+            ->with('user')
+            ->latest()
+            ->paginate(20);
+
+        return view('news.show', compact('article', 'comments'));
     }
 }
