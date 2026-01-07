@@ -9,10 +9,7 @@
             Join the community of Tarnished warriors. Share strategies, discuss lore, and conquer the Lands Between together.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-            <a href="{{ route('news.index') }}" class="elden-button">
-                Latest News
-            </a>
-            <a href="{{ route('forum.index') }}" class="bg-slate-700 hover:bg-slate-600 text-amber-400 font-bold py-2 px-6 rounded border-2 border-amber-900/50 transition duration-300">
+            <a href="{{ route('forum.index') }}" class="elden-button">
                 Browse Forum
             </a>
         </div>
@@ -109,28 +106,6 @@
                 <p class="text-slate-400">No forum threads yet. Be the first to start a discussion!</p>
             </div>
         @endif
-    </div>
-
-    <!-- Call to Action -->
-    <div class="mt-12 elden-card p-8 text-center">
-        <h3 class="text-2xl font-bold elden-text-gold mb-3" style="font-family: 'Cinzel', serif;">Join the Community</h3>
-        <p class="text-slate-300 mb-6 max-w-2xl mx-auto">
-            Connect with fellow Tarnished, share your experiences, and get help with the toughest bosses.
-        </p>
-        @guest
-            <div class="flex justify-center gap-4">
-                <a href="{{ route('register') }}" class="elden-button">
-                    Register Now
-                </a>
-                <a href="{{ route('login') }}" class="bg-slate-700 hover:bg-slate-600 text-amber-400 font-bold py-2 px-6 rounded border-2 border-amber-900/50 transition duration-300">
-                    Login
-                </a>
-            </div>
-        @else
-            <a href="{{ route('forum.threads.create') }}" class="elden-button inline-block">
-                Start a Discussion
-            </a>
-        @endguest
     </div>
 </div>
 @endsection

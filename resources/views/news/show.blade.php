@@ -4,6 +4,17 @@
     </x-slot>
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Back to News Button -->
+        <div class="mb-6">
+            <a href="{{ route('news.index') }}"
+               class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 font-medium transition-colors group">
+                <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span>Back to News</span>
+            </a>
+        </div>
+
         <article class="elden-card overflow-hidden">
             @if($article->image)
                 <div class="relative h-[500px] overflow-hidden">
@@ -34,16 +45,6 @@
                     <div class="text-slate-200 leading-relaxed text-lg space-y-4">
                         {!! nl2br(e($article->content)) !!}
                     </div>
-                </div>
-
-                <div class="mt-12 pt-8 elden-border">
-                    <a href="{{ route('news.index') }}"
-                       class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 font-medium transition-colors group">
-                        <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                        <span>Back to News</span>
-                    </a>
                 </div>
             </div>
         </article>
