@@ -36,10 +36,6 @@
                             <span class="sm:hidden">Admin</span>
                         </a>
                     @endif
-                    <a href="{{ route('messages.index') }}" class="text-slate-300 hover:text-amber-400 hover:bg-slate-900/50 px-4 py-2 rounded-md text-sm font-medium transition-all">
-                        <span class="hidden sm:inline">Messages</span>
-                        <span class="sm:hidden">📨</span>
-                    </a>
                     <a href="{{ route('profile.show', auth()->user()) }}" class="flex items-center text-slate-300 hover:text-amber-400 hover:bg-slate-900/50 px-3 py-2 rounded-md transition-all">
                         <x-user-avatar :user="auth()->user()" size="sm" />
                         <span class="ml-2 hidden md:inline text-sm font-medium">{{ auth()->user()->username ?? auth()->user()->name }}</span>

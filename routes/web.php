@@ -41,9 +41,6 @@ Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forum/category/{slug}', [ForumCategoryController::class, 'show'])->name('forum.category.show');
 Route::get('/forum/threads/{thread}', [ForumThreadController::class, 'show'])->name('forum.threads.show');
 
-// Placeholder routes (to be implemented)
-Route::get('/messages', fn() => view('welcome'))->name('messages.index');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
