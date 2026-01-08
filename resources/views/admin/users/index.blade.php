@@ -66,15 +66,14 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="{{ route('profile.show', $user) }}"
-                                   class="text-amber-400 hover:text-amber-300 mr-3"
-                                   target="_blank">
+                                   class="text-amber-400 hover:text-amber-300 mr-3">
                                     View
                                 </a>
                                 <a href="{{ route('admin.users.edit', $user) }}"
                                    class="text-blue-400 hover:text-blue-300 mr-3">
                                     Edit
                                 </a>
-                                @if($user->id !== auth()->id())
+                                @if($user->id !== auth()->id() && $user->id !== 1)
                                     <form method="POST"
                                           action="{{ route('admin.users.destroy', $user) }}"
                                           class="inline"
@@ -85,6 +84,8 @@
                                             Delete
                                         </button>
                                     </form>
+                                @elseif($user->id === 1)
+                                    <span class="text-slate-600 cursor-not-allowed" title="First admin cannot be deleted">Delete</span>
                                 @endif
                             </td>
                         </tr>

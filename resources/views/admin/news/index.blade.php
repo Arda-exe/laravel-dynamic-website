@@ -46,7 +46,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                @if($article->is_published)
+                                @if($article->published_at)
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-900/30 text-green-400">
                                         Published
                                     </span>
@@ -60,11 +60,14 @@
                                 {{ $article->published_at?->format('M d, Y') ?? 'N/A' }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="{{ route('news.show', $article->slug) }}"
-                                   class="text-amber-400 hover:text-amber-300 mr-3"
-                                   target="_blank">
-                                    View
-                                </a>
+                                @if($article->published_at)
+                                    <a href="{{ route('news.show', $article->slug) }}"
+                                       class="text-amber-400 hover:text-amber-300 mr-3">
+                                        View
+                                    </a>
+                                @else
+                                    <span class="text-slate-600 mr-3 cursor-not-allowed">View</span>
+                                @endif
                                 <a href="{{ route('admin.news.edit', $article) }}"
                                    class="text-blue-400 hover:text-blue-300 mr-3">
                                     Edit

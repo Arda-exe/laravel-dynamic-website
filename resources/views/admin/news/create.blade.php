@@ -75,17 +75,8 @@
                     @enderror
                 </div>
 
-                <!-- Published Status -->
-                <div class="mb-6">
-                    <label class="flex items-center">
-                        <input type="checkbox"
-                               name="is_published"
-                               value="1"
-                               {{ old('is_published') ? 'checked' : '' }}
-                               class="rounded border-amber-900/30 bg-slate-900/50 text-amber-600 focus:ring-amber-600 focus:ring-offset-slate-950">
-                        <span class="ml-2 text-sm text-slate-300">Publish immediately</span>
-                    </label>
-                </div>
+                <!-- Hidden field for publish status -->
+                <input type="hidden" name="is_published" id="is_published" value="0">
 
                 <!-- Buttons -->
                 <div class="flex items-center justify-between pt-4 border-t border-amber-900/20">
@@ -93,9 +84,18 @@
                        class="text-slate-400 hover:text-amber-400 transition-colors">
                         Cancel
                     </a>
-                    <button type="submit" class="elden-button">
-                        Create Article
-                    </button>
+                    <div class="flex gap-3">
+                        <button type="submit"
+                                onclick="document.getElementById('is_published').value='0'"
+                                class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold py-2 px-6 rounded transition duration-300">
+                            Save as Draft
+                        </button>
+                        <button type="submit"
+                                onclick="document.getElementById('is_published').value='1'"
+                                class="elden-button">
+                            Publish
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>

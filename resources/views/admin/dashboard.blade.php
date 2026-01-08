@@ -115,7 +115,7 @@
                                     {{ $article->title }}
                                 </a>
                                 <div class="flex items-center gap-2 mt-1">
-                                    <p class="text-xs text-slate-400">{{ $article->user->username ?? 'Unknown' }}</p>
+                                    <p class="text-xs text-slate-400">{{ $article->user->name ?? 'Unknown' }}</p>
                                     <span class="text-slate-600">•</span>
                                     @if($article->published_at)
                                         <span class="px-1.5 py-0.5 text-xs font-semibold rounded bg-green-900/30 text-green-400">Published</span>

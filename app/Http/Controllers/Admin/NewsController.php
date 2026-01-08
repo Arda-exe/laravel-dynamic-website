@@ -61,6 +61,11 @@ class NewsController extends Controller
 
     public function destroy(NewsArticle $news)
     {
+        // Delete associated image if it exists
+        if ($news->image) {
+            \Storage::disk('public')->delete($news->image);
+        }
+
         $news->delete();
         return redirect()->route('admin.news.index')->with('success', 'News article deleted successfully.');
     }

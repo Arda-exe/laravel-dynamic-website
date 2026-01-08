@@ -46,7 +46,7 @@ class NewsArticle extends Model
      */
     public function scopePublished(Builder $query): Builder
     {
-        return $query->where('is_published', true);
+        return $query->whereNotNull('published_at');
     }
 
     /**

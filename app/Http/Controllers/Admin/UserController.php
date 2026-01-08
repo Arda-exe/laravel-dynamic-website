@@ -103,6 +103,16 @@ class UserController extends Controller
             return redirect()->route('admin.users.index')->with('error', 'You cannot delete your own account.');
         }
 
+        // Prevent deleting the first admin
+        if ($user->id === 1) {
+            return redirect()->route('admin.users.index')->with('error', 'The first administrator account cannot be deleted.');
+        }
+
+        // Delete user's profile photo if it exists
+        if ($user->photo) {
+            \Storage::disk('public')->delete($user->photo);
+        }
+
         $user->delete();
 
         return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');

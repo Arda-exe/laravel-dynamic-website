@@ -88,17 +88,21 @@
                     @enderror
                 </div>
 
-                <!-- Published Status -->
-                <div class="mb-6">
-                    <label class="flex items-center">
-                        <input type="checkbox"
-                               name="is_published"
-                               value="1"
-                               {{ old('is_published', $article->is_published) ? 'checked' : '' }}
-                               class="rounded border-amber-900/30 bg-slate-900/50 text-amber-600 focus:ring-amber-600 focus:ring-offset-slate-950">
-                        <span class="ml-2 text-sm text-slate-300">Published</span>
-                    </label>
+                <!-- Current Status Display -->
+                <div class="mb-6 p-4 bg-slate-900/50 border border-amber-900/20 rounded">
+                    <p class="text-sm text-slate-400">
+                        Current Status:
+                        @if($article->published_at)
+                            <span class="ml-2 px-2 py-1 text-xs font-semibold rounded bg-green-900/30 text-green-400">Published</span>
+                            <span class="ml-2 text-xs text-slate-500">on {{ $article->published_at->format('M d, Y') }}</span>
+                        @else
+                            <span class="ml-2 px-2 py-1 text-xs font-semibold rounded bg-gray-700/30 text-gray-400">Draft</span>
+                        @endif
+                    </p>
                 </div>
+
+                <!-- Hidden field for publish status -->
+                <input type="hidden" name="is_published" id="is_published" value="{{ $article->published_at ? '1' : '0' }}">
 
                 <!-- Buttons -->
                 <div class="flex items-center justify-between pt-4 border-t border-amber-900/20">
@@ -106,9 +110,18 @@
                        class="text-slate-400 hover:text-amber-400 transition-colors">
                         Cancel
                     </a>
-                    <button type="submit" class="elden-button">
-                        Update Article
-                    </button>
+                    <div class="flex gap-3">
+                        <button type="submit"
+                                onclick="document.getElementById('is_published').value='0'"
+                                class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold py-2 px-6 rounded transition duration-300">
+                            Save as Draft
+                        </button>
+                        <button type="submit"
+                                onclick="document.getElementById('is_published').value='1'"
+                                class="elden-button">
+                            {{ $article->published_at ? 'Update & Keep Published' : 'Publish' }}
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
