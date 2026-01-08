@@ -9,7 +9,7 @@
     ];
 
     $sizeClass = $sizes[$size] ?? $sizes['md'];
-    $name = $user->username ?? $user->name;
+    $name = $user->name;
 
     // If user has uploaded photo, use it; otherwise use a random default avatar
     if ($user->photo) {

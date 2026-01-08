@@ -8,7 +8,7 @@
 
                 <div class="flex-grow">
                     <h2 class="text-3xl font-bold elden-title mb-2">
-                        {{ $user->username }}
+                        {{ $user->name }}
                     </h2>
 
                     @if($user->bio)

@@ -26,7 +26,7 @@
                             </a>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <a href="{{ route('home') }}" class="text-amber-400 hover:text-amber-300 transition-colors" target="_blank">
+                            <a href="{{ route('home') }}" class="text-amber-400 hover:text-amber-300 transition-colors">
                                 View Site
                             </a>
                             <span class="text-slate-500">|</span>
@@ -45,21 +45,29 @@
                 <x-alert type="error" :message="session('error')" />
             @endif
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-slate-950/80 backdrop-blur-sm shadow-2xl border-b border-amber-900/20">
-                    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-                        <h1 class="text-4xl font-bold elden-title">
-                            {{ $header }}
-                        </h1>
-                    </div>
-                </header>
-            @endisset
+            <div class="flex flex-1">
+                <!-- Sidebar -->
+                <x-admin-sidebar />
 
-            <!-- Page Content -->
-            <main class="flex-grow py-8">
-                {{ $slot }}
-            </main>
+                <!-- Main Content Area -->
+                <div class="flex-1 flex flex-col">
+                    <!-- Page Heading -->
+                    @isset($header)
+                        <header class="bg-slate-950/80 backdrop-blur-sm shadow-2xl border-b border-amber-900/20">
+                            <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+                                <h1 class="text-4xl font-bold elden-title">
+                                    {{ $header }}
+                                </h1>
+                            </div>
+                        </header>
+                    @endisset
+
+                    <!-- Page Content -->
+                    <main class="flex-grow">
+                        {{ $slot }}
+                    </main>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->

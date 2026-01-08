@@ -30,7 +30,7 @@
                     <x-user-avatar :user="$article->user" size="lg" />
                     <div>
                         <p class="text-amber-400 font-semibold text-lg">
-                            {{ $article->user->username ?? $article->user->name }}
+                            {{ $article->user->name }}
                         </p>
                         <p class="text-slate-400 text-sm flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

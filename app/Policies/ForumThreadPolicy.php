@@ -12,7 +12,7 @@ class ForumThreadPolicy
      */
     public function update(User $user, ForumThread $thread): bool
     {
-        return $user->id === $thread->user_id || $user->is_admin;
+        return $user->id === $thread->user_id || $user->role === 'admin';
     }
 
     /**
@@ -20,7 +20,7 @@ class ForumThreadPolicy
      */
     public function delete(User $user, ForumThread $thread): bool
     {
-        return $user->id === $thread->user_id || $user->is_admin;
+        return $user->id === $thread->user_id || $user->role === 'admin';
     }
 
     /**
@@ -28,7 +28,7 @@ class ForumThreadPolicy
      */
     public function pin(User $user): bool
     {
-        return $user->is_admin;
+        return $user->role === 'admin';
     }
 
     /**
@@ -36,6 +36,6 @@ class ForumThreadPolicy
      */
     public function lock(User $user): bool
     {
-        return $user->is_admin;
+        return $user->role === 'admin';
     }
 }

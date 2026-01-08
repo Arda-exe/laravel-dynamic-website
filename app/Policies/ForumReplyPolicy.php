@@ -12,6 +12,6 @@ class ForumReplyPolicy
      */
     public function delete(User $user, ForumReply $reply): bool
     {
-        return $user->id === $reply->user_id || $user->is_admin;
+        return $user->id === $reply->user_id || $user->role === 'admin';
     }
 }

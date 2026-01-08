@@ -11,7 +11,7 @@
                 <!-- Name -->
                 <div class="mb-6">
                     <label for="name" class="block text-sm font-medium text-amber-400 mb-2">
-                        Name <span class="text-red-400">*</span>
+                        Username <span class="text-red-400">*</span>
                     </label>
                     <input type="text"
                            id="name"
@@ -20,29 +20,11 @@
                            required
                            maxlength="255"
                            class="elden-input w-full px-4 py-2"
-                           placeholder="Enter user's full name">
-                    @error('name')
-                        <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Username -->
-                <div class="mb-6">
-                    <label for="username" class="block text-sm font-medium text-amber-400 mb-2">
-                        Username <span class="text-red-400">*</span>
-                    </label>
-                    <input type="text"
-                           id="username"
-                           name="username"
-                           value="{{ old('username') }}"
-                           required
-                           maxlength="255"
-                           class="elden-input w-full px-4 py-2"
-                           placeholder="username">
+                           placeholder="tarnished_123456">
                     <p class="mt-1 text-xs text-slate-400">
-                        Letters, numbers, dashes and underscores only
+                        This will be the user's display name
                     </p>
-                    @error('username')
+                    @error('name')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
                     @enderror
                 </div>
@@ -65,22 +47,22 @@
                     @enderror
                 </div>
 
-                <!-- Admin Status -->
+                <!-- Role -->
                 <div class="mb-6">
-                    <label class="flex items-center">
-                        <input type="hidden" name="is_admin" value="0">
-                        <input type="checkbox"
-                               id="is_admin"
-                               name="is_admin"
-                               value="1"
-                               {{ old('is_admin') ? 'checked' : '' }}
-                               class="rounded bg-slate-900/50 border-amber-900/30 text-amber-600 focus:border-amber-600 focus:ring-2 focus:ring-amber-600/30">
-                        <span class="ml-2 text-sm text-amber-400">Administrator</span>
+                    <label for="role" class="block text-sm font-medium text-amber-400 mb-2">
+                        Role <span class="text-red-400">*</span>
                     </label>
+                    <select id="role"
+                            name="role"
+                            required
+                            class="elden-input w-full px-4 py-2">
+                        <option value="user" {{ old('role') === 'user' ? 'selected' : '' }}>User</option>
+                        <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Administrator</option>
+                    </select>
                     <p class="mt-1 text-xs text-slate-400">
                         Administrators have full access to the admin panel
                     </p>
-                    @error('is_admin')
+                    @error('role')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
                     @enderror
                 </div>

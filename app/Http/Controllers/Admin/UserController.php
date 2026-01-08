@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +19,7 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $users = User::with('roles')->latest()->paginate(20);
+        $users = User::latest()->paginate(20);
         return view('admin.users.index', compact('users'));
     }
 
@@ -29,8 +28,7 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        $roles = Role::all();
-        return view('admin.users.create', compact('roles'));
+        return view('admin.users.create');
     }
 
     /**
@@ -39,19 +37,17 @@ class UserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users,name',
             'email' => 'required|email|unique:users,email',
-            'username' => 'required|string|max:255|unique:users,username|alpha_dash',
-            'is_admin' => 'boolean',
+            'role' => 'required|in:user,admin',
         ]);
 
         // Create the user with a random password
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'username' => $request->username,
             'password' => Hash::make(Str::random(32)),
-            'is_admin' => $request->boolean('is_admin'),
+            'role' => $request->role,
             'email_verified_at' => null,
         ]);
 
@@ -67,8 +63,7 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        $roles = Role::all();
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -77,34 +72,23 @@ class UserController extends Controller
     public function update(Request $request, User $user): RedirectResponse
     {
         // Protect the first admin from being demoted
-        if ($user->id === 1 && !$request->boolean('is_admin')) {
+        if ($user->id === 1 && $request->role !== 'admin') {
             return redirect()->back()
-                ->with('error', 'The first administrator cannot have their admin status removed.')
+                ->with('error', 'The first administrator cannot have their admin role removed.')
                 ->withInput();
         }
 
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users,name,' . $user->id,
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'username' => 'nullable|string|max:255|unique:users,username,' . $user->id,
-            'is_admin' => 'boolean',
-            'roles' => 'array',
-            'roles.*' => 'exists:roles,id',
+            'role' => 'required|in:user,admin',
         ]);
 
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'username' => $request->username,
-            'is_admin' => $request->boolean('is_admin'),
+            'role' => $request->role,
         ]);
-
-        // Sync roles
-        if ($request->has('roles')) {
-            $user->roles()->sync($request->roles);
-        } else {
-            $user->roles()->sync([]);
-        }
 
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
     }

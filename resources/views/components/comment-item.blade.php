@@ -9,7 +9,7 @@
         <div class="flex items-center justify-between mb-2">
             <div>
                 <span class="font-semibold text-amber-400">
-                    {{ $comment->user->username ?? $comment->user->name }}
+                    {{ $comment->user->name }}
                 </span>
                 <span class="text-slate-500 text-sm ml-2">
                     {{ $comment->created_at->diffForHumans() }}

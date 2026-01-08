@@ -38,7 +38,7 @@
                     @endif
                     <a href="{{ route('profile.show', auth()->user()) }}" class="flex items-center text-slate-300 hover:text-amber-400 hover:bg-slate-900/50 px-3 py-2 rounded-md transition-all">
                         <x-user-avatar :user="auth()->user()" size="sm" />
-                        <span class="ml-2 hidden md:inline text-sm font-medium">{{ auth()->user()->username ?? auth()->user()->name }}</span>
+                        <span class="ml-2 hidden md:inline text-sm font-medium">{{ auth()->user()->name }}</span>
                     </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

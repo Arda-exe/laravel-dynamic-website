@@ -22,10 +22,7 @@
                             Email
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-amber-400 uppercase tracking-wider">
-                            Roles
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-amber-400 uppercase tracking-wider">
-                            Admin
+                            Role
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-amber-400 uppercase tracking-wider">
                             Joined
@@ -45,11 +42,6 @@
                                         <div class="text-sm font-medium text-slate-200">
                                             {{ $user->name }}
                                         </div>
-                                        @if($user->username)
-                                            <div class="text-xs text-slate-400">
-                                                @{{ $user->username }}
-                                            </div>
-                                        @endif
                                     </div>
                                 </div>
                             </td>
@@ -58,24 +50,13 @@
                                     {{ $user->email }}
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex flex-wrap gap-1">
-                                    @forelse($user->roles as $role)
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-900/30 text-blue-400">
-                                            {{ $role->name }}
-                                        </span>
-                                    @empty
-                                        <span class="text-xs text-slate-500">No roles</span>
-                                    @endforelse
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                @if($user->is_admin)
+                            <td class="px-6 py-4">
+                                @if($user->role === 'admin')
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-900/30 text-red-400">
                                         Admin
                                     </span>
                                 @else
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-700/30 text-gray-400">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-900/30 text-blue-400">
                                         User
                                     </span>
                                 @endif
@@ -109,7 +90,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-4 text-center text-slate-400">
+                            <td colspan="5" class="px-6 py-4 text-center text-slate-400">
                                 No users found.
                             </td>
                         </tr>

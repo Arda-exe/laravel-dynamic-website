@@ -12,7 +12,7 @@
                 <!-- Name -->
                 <div class="mb-6">
                     <label for="name" class="block text-sm font-medium text-amber-400 mb-2">
-                        Name <span class="text-red-400">*</span>
+                        Username <span class="text-red-400">*</span>
                     </label>
                     <input type="text"
                            id="name"
@@ -21,7 +21,7 @@
                            required
                            maxlength="255"
                            class="elden-input w-full px-4 py-2"
-                           placeholder="Enter user's full name">
+                           placeholder="tarnished_123456">
                     @error('name')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
                     @enderror
@@ -45,77 +45,30 @@
                     @enderror
                 </div>
 
-                <!-- Username -->
+                <!-- Role -->
                 <div class="mb-6">
-                    <label for="username" class="block text-sm font-medium text-amber-400 mb-2">
-                        Username
+                    <label for="role" class="block text-sm font-medium text-amber-400 mb-2">
+                        Role <span class="text-red-400">*</span>
                     </label>
-                    <input type="text"
-                           id="username"
-                           name="username"
-                           value="{{ old('username', $user->username) }}"
-                           maxlength="255"
-                           class="elden-input w-full px-4 py-2"
-                           placeholder="username">
-                    @error('username')
-                        <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Admin Status -->
-                <div class="mb-6">
-                    <label class="flex items-center">
-                        <input type="hidden" name="is_admin" value="0">
-                        <input type="checkbox"
-                               id="is_admin"
-                               name="is_admin"
-                               value="1"
-                               {{ old('is_admin', $user->is_admin) ? 'checked' : '' }}
-                               {{ $user->id === 1 ? 'disabled' : '' }}
-                               class="rounded bg-slate-900/50 border-amber-900/30 text-amber-600 focus:border-amber-600 focus:ring-2 focus:ring-amber-600/30 {{ $user->id === 1 ? 'opacity-50 cursor-not-allowed' : '' }}">
-                        <span class="ml-2 text-sm text-amber-400">Administrator</span>
-                        @if($user->id === 1)
-                            <svg class="w-4 h-4 text-amber-500 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                            </svg>
-                            <input type="hidden" name="is_admin" value="1">
-                        @endif
-                    </label>
+                    <select id="role"
+                            name="role"
+                            required
+                            {{ $user->id === 1 ? 'disabled' : '' }}
+                            class="elden-input w-full px-4 py-2 {{ $user->id === 1 ? 'opacity-50 cursor-not-allowed' : '' }}">
+                        <option value="user" {{ old('role', $user->role) === 'user' ? 'selected' : '' }}>User</option>
+                        <option value="admin" {{ old('role', $user->role) === 'admin' ? 'selected' : '' }}>Administrator</option>
+                    </select>
+                    @if($user->id === 1)
+                        <input type="hidden" name="role" value="admin">
+                    @endif
                     <p class="mt-1 text-xs text-slate-400">
                         @if($user->id === 1)
-                            <span class="text-amber-500 font-medium">Protected:</span> The first administrator cannot have their admin status removed
+                            <span class="text-amber-500 font-medium">Protected:</span> The first administrator cannot have their admin role removed
                         @else
                             Administrators have full access to the admin panel
                         @endif
                     </p>
-                    @error('is_admin')
-                        <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Roles -->
-                <div class="mb-6">
-                    <label class="block text-sm font-medium text-amber-400 mb-2">
-                        Roles
-                    </label>
-                    <div class="space-y-2">
-                        @foreach($roles as $role)
-                            <label class="flex items-center">
-                                <input type="checkbox"
-                                       name="roles[]"
-                                       value="{{ $role->id }}"
-                                       {{ in_array($role->id, old('roles', $user->roles->pluck('id')->toArray())) ? 'checked' : '' }}
-                                       class="rounded bg-slate-900/50 border-amber-900/30 text-amber-600 focus:border-amber-600 focus:ring-2 focus:ring-amber-600/30">
-                                <span class="ml-2 text-sm text-slate-300">
-                                    {{ ucfirst($role->name) }}
-                                    @if($role->description)
-                                        <span class="text-xs text-slate-500">- {{ $role->description }}</span>
-                                    @endif
-                                </span>
-                            </label>
-                        @endforeach
-                    </div>
-                    @error('roles')
+                    @error('role')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
                     @enderror
                 </div>

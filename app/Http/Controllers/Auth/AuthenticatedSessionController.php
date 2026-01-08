@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended(route('home', absolute: false))
-            ->with('success', 'Welcome back, ' . Auth::user()->username . '!');
+            ->with('success', 'Welcome back, ' . Auth::user()->name . '!');
     }
 
     /**

@@ -69,20 +69,20 @@
 
                 <!-- Username -->
                 <div class="mb-6">
-                    <label for="username" class="block text-sm font-medium text-amber-400 mb-2">
+                    <label for="name" class="block text-sm font-medium text-amber-400 mb-2">
                         Username <span class="text-red-400">*</span>
                     </label>
                     <input type="text"
-                           id="username"
-                           name="username"
-                           value="{{ old('username', $user->username) }}"
+                           id="name"
+                           name="name"
+                           value="{{ old('name', $user->name) }}"
                            required
                            maxlength="255"
                            pattern="[a-zA-Z0-9_-]+"
                            class="elden-input w-full px-4 py-2"
                            placeholder="your_username">
                     <p class="mt-1 text-xs text-slate-400">Only letters, numbers, underscores, and dashes. Must be unique.</p>
-                    @error('username')
+                    @error('name')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
                     @enderror
                 </div>

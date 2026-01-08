@@ -81,10 +81,10 @@
                             <div class="flex items-center space-x-3">
                                 <x-user-avatar :user="$user" size="sm" />
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-200 truncate">{{ $user->username ?? $user->name }}</p>
+                                    <p class="text-sm font-medium text-slate-200 truncate">{{ $user->name }}</p>
                                     <div class="flex items-center gap-2">
                                         <p class="text-xs text-slate-400">{{ $user->created_at->format('M d, Y') }}</p>
-                                        @if($user->is_admin)
+                                        @if($user->role === 'admin')
                                             <span class="px-1.5 py-0.5 text-xs font-semibold rounded bg-red-900/30 text-red-400">Admin</span>
                                         @endif
                                     </div>

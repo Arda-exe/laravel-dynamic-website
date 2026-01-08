@@ -12,7 +12,7 @@ class NewsArticlePolicy
      */
     public function update(User $user, NewsArticle $article): bool
     {
-        return $user->is_admin;
+        return $user->role === 'admin';
     }
 
     /**
@@ -20,6 +20,6 @@ class NewsArticlePolicy
      */
     public function delete(User $user, NewsArticle $article): bool
     {
-        return $user->is_admin;
+        return $user->role === 'admin';
     }
 }

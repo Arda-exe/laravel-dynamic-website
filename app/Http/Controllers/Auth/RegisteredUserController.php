@@ -34,16 +34,16 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Generate unique username
+        // Generate unique name
         do {
-            $username = 'tarnished_' . str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
-        } while (User::where('username', $username)->exists());
+            $name = 'tarnished_' . str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        } while (User::where('name', $name)->exists());
 
         $user = User::create([
-            'name' => $username,
-            'username' => $username,
+            'name' => $name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'user', // Default role for new users
         ]);
 
         event(new Registered($user));
@@ -51,6 +51,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('home', absolute: false))
-            ->with('success', 'Welcome to the Lands Between, ' . $username . '!');
+            ->with('success', 'Welcome to the Lands Between, ' . $name . '!');
     }
 }

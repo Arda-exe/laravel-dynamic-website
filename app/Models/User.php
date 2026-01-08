@@ -23,11 +23,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'username',
+        'role',
         'birthday',
         'photo',
         'bio',
-        'is_admin',
     ];
 
     /**
@@ -51,7 +50,6 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'birthday' => 'date',
-            'is_admin' => 'boolean',
         ];
     }
 
@@ -72,19 +70,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the roles that belong to the user.
-     */
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
-    /**
      * Check if the user has a specific role.
      */
     public function hasRole(string $roleName): bool
     {
-        return $this->roles()->where('name', $roleName)->exists();
+        return $this->role === $roleName;
     }
 
     /**
@@ -108,6 +98,6 @@ class User extends Authenticatable
      */
     public function isAdmin(): bool
     {
-        return $this->is_admin;
+        return $this->role === 'admin';
     }
 }
