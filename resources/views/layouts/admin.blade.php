@@ -22,7 +22,7 @@
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <div class="flex-shrink-0 flex items-center">
-                                <a href="{{ route('dashboard') }}" class="text-xl font-bold text-yellow-400" style="font-family: 'Cinzel', serif;">
+                                <a href="{{ route('admin.dashboard') }}" class="text-xl font-bold text-yellow-400" style="font-family: 'Cinzel', serif;">
                                     Admin Panel
                                 </a>
                             </div>

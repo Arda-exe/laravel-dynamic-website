@@ -6,6 +6,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-6 flex justify-between items-center">
             <h2 class="text-2xl font-bold text-amber-400">All Users</h2>
+            <a href="{{ route('admin.users.create') }}" class="elden-button">
+                Create New User
+            </a>
         </div>
 
         <div class="bg-slate-900/50 border border-amber-900/30 rounded-lg overflow-hidden">

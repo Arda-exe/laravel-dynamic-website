@@ -71,11 +71,22 @@
                                name="is_admin"
                                value="1"
                                {{ old('is_admin', $user->is_admin) ? 'checked' : '' }}
-                               class="rounded bg-slate-900/50 border-amber-900/30 text-amber-600 focus:border-amber-600 focus:ring-2 focus:ring-amber-600/30">
+                               {{ $user->id === 1 ? 'disabled' : '' }}
+                               class="rounded bg-slate-900/50 border-amber-900/30 text-amber-600 focus:border-amber-600 focus:ring-2 focus:ring-amber-600/30 {{ $user->id === 1 ? 'opacity-50 cursor-not-allowed' : '' }}">
                         <span class="ml-2 text-sm text-amber-400">Administrator</span>
+                        @if($user->id === 1)
+                            <svg class="w-4 h-4 text-amber-500 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                            <input type="hidden" name="is_admin" value="1">
+                        @endif
                     </label>
                     <p class="mt-1 text-xs text-slate-400">
-                        Administrators have full access to the admin panel
+                        @if($user->id === 1)
+                            <span class="text-amber-500 font-medium">Protected:</span> The first administrator cannot have their admin status removed
+                        @else
+                            Administrators have full access to the admin panel
+                        @endif
                     </p>
                     @error('is_admin')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
