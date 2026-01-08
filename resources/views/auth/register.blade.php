@@ -1,45 +1,59 @@
 <x-guest-layout>
+    <h2 class="text-2xl font-bold text-center mb-6 elden-text-gold" style="font-family: 'Cinzel', serif;">
+        Join the Tarnished
+    </h2>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <label for="email" class="block text-sm font-medium text-amber-400 mb-2">
+                {{ __('Email') }}
+            </label>
+            <input id="email" class="elden-input block w-full px-4 py-2" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
+            <label for="password" class="block text-sm font-medium text-amber-400 mb-2">
+                {{ __('Password') }}
+            </label>
+            <input id="password" class="elden-input block w-full px-4 py-2" type="password" name="password" required autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
+            <label for="password_confirmation" class="block text-sm font-medium text-amber-400 mb-2">
+                {{ __('Confirm Password') }}
+            </label>
+            <input id="password_confirmation" class="elden-input block w-full px-4 py-2" type="password" name="password_confirmation" required autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+        <div class="mt-4 p-3 bg-slate-800/50 border border-amber-900/20 rounded text-sm text-slate-300">
+            <p class="text-amber-400 font-medium mb-1">Note:</p>
+            <p>A unique username will be automatically generated for you. You can change it later in your profile settings.</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between mt-6 gap-4">
+            <a class="text-sm text-amber-400 hover:text-amber-300 transition-colors" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 
-            <x-primary-button class="ms-4">
+            <button type="submit" id="register-btn" class="elden-button w-full sm:w-auto">
                 {{ __('Register') }}
-            </x-primary-button>
+            </button>
         </div>
     </form>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const btn = document.getElementById('register-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="inline-block animate-spin mr-2">⟳</span> Registering...';
+        });
+    </script>
 </x-guest-layout>
