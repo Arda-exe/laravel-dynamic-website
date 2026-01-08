@@ -15,18 +15,9 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-slate-950 relative">
-            <!-- Background overlay -->
-            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614732414444-096e5f1122d5?q=80&w=1974')] bg-cover bg-center opacity-10"></div>
-
-            <div class="relative z-10">
-                <a href="/">
-                    <h1 class="text-4xl font-bold elden-title mb-2" style="font-family: 'Cinzel', serif;">Elden Ring</h1>
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-8 py-6 elden-card shadow-2xl overflow-hidden sm:rounded-lg relative z-10">
+    <body class="font-sans antialiased" style="background-image: linear-gradient(to bottom, rgba(2, 6, 23, 0.85), rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.85)), url('{{ asset('images/wallpaper.png') }}'); background-attachment: fixed; background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+            <div class="w-full sm:max-w-md px-8 py-6 elden-card shadow-2xl overflow-hidden sm:rounded-lg relative z-10">
                 {{ $slot }}
             </div>
         </div>
