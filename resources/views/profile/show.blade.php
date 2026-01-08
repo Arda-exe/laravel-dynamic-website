@@ -1,8 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        {{ $user->username ?? $user->name }}'s Profile
-    </x-slot>
-
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="elden-card p-8">
             <div class="flex items-start gap-8">
@@ -12,12 +8,8 @@
 
                 <div class="flex-grow">
                     <h2 class="text-3xl font-bold elden-title mb-2">
-                        {{ $user->name }}
+                        {{ $user->username }}
                     </h2>
-
-                    @if($user->username)
-                        <p class="text-amber-400 mb-4">@{‌{ $user->username }}</p>
-                    @endif
 
                     @if($user->bio)
                         <div class="mb-6">

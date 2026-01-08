@@ -1,9 +1,14 @@
 <x-app-layout>
-    <x-slot name="header">
-        Edit Profile
-    </x-slot>
-
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <!-- Go Back Button -->
+        <div>
+            <a href="{{ route('profile.show', auth()->user()) }}" class="inline-flex items-center text-amber-400 hover:text-amber-300 transition-colors">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Back to Profile
+            </a>
+        </div>
         <!-- Profile Photo -->
         <div class="elden-card p-8">
             <h3 class="text-xl font-bold text-amber-400 mb-6">Profile Photo</h3>
@@ -44,23 +49,6 @@
             <form method="POST" action="{{ route('profile.update') }}">
                 @csrf
                 @method('PATCH')
-
-                <!-- Name -->
-                <div class="mb-6">
-                    <label for="name" class="block text-sm font-medium text-amber-400 mb-2">
-                        Name <span class="text-red-400">*</span>
-                    </label>
-                    <input type="text"
-                           id="name"
-                           name="name"
-                           value="{{ old('name', $user->name) }}"
-                           required
-                           maxlength="255"
-                           class="elden-input w-full px-4 py-2">
-                    @error('name')
-                        <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
-                    @enderror
-                </div>
 
                 <!-- Email -->
                 <div class="mb-6">
