@@ -6,6 +6,7 @@ use App\Models\ForumReply;
 use App\Models\ForumThread;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ForumReplyController extends Controller
 {
@@ -30,7 +31,7 @@ class ForumReplyController extends Controller
 
     public function destroy(ForumReply $reply): RedirectResponse
     {
-        $this->authorize('delete', $reply);
+        Gate::authorize('delete', $reply);
 
         $thread = $reply->thread;
         $reply->delete();
