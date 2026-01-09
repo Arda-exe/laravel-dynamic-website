@@ -17,21 +17,21 @@ class UserSeeder extends Seeder
         // Create 3 admin users
         $admins = [
             [
-                'name' => 'Admin Master',
+                'name' => 'admin_master',
                 'email' => 'admin@ehb.be',
                 'password' => Hash::make('Password!321'),
                 'role' => 'admin',
                 'bio' => 'Chief System Administrator and Community Manager',
             ],
             [
-                'name' => 'Moderator Ranni',
+                'name' => 'moderator_ranni',
                 'email' => 'mod1@ehb.be',
                 'password' => Hash::make('Password!321'),
                 'role' => 'admin',
                 'bio' => 'Content Moderator and Lore Expert',
             ],
             [
-                'name' => 'Moderator Melina',
+                'name' => 'moderator_melina',
                 'email' => 'mod2@ehb.be',
                 'password' => Hash::make('Password!321'),
                 'role' => 'admin',
@@ -45,11 +45,11 @@ class UserSeeder extends Seeder
 
         // Create 20 regular users
         $userNames = [
-            'Tarnished Warrior', 'Elden Lord Seeker', 'Maiden Protector', 'Rune Hunter',
-            'Grace Follower', 'Radagon Champion', 'Malenia Survivor', 'Godrick Slayer',
-            'Rennala Student', 'Radahn Challenger', 'Morgott Defeater', 'Mohg Fighter',
-            'Astel Vanquisher', 'Fire Giant Victor', 'Maliketh Hunter', 'Godfrey Challenger',
-            'Placidusax Seeker', 'Fortissax Warrior', 'Lichdragon Fighter', 'Ancient Hero'
+            'tarnished_warrior', 'elden_lord_seeker', 'maiden_protector', 'rune_hunter',
+            'grace_follower', 'radagon_champion', 'malenia_survivor', 'godrick_slayer',
+            'rennala_student', 'radahn_challenger', 'morgott_defeater', 'mohg_fighter',
+            'astel_vanquisher', 'fire_giant_victor', 'maliketh_hunter', 'godfrey_challenger',
+            'placidusax_seeker', 'fortissax_warrior', 'lichdragon_fighter', 'ancient_hero'
         ];
 
         $bios = [

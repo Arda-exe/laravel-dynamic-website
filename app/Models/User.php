@@ -54,6 +54,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'name';
+    }
+
+    /**
      * Get the news articles created by the user.
      */
     public function newsArticles(): HasMany
