@@ -20,7 +20,7 @@ Dit project is een data-driven webapplicatie ontwikkeld met Laravel voor het vak
 
 1. **Clone de repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Arda-exe/laravel-dynamic-website.git
    cd laravel-dynamic-website
    ```
 
@@ -180,8 +180,3 @@ Dit project is een data-driven webapplicatie ontwikkeld met Laravel voor het vak
 
 ### AI Assistentie
 - **GitHub Copilot** - Gebruikt voor het ontwerpen van de UI, plannen van code structuur en controleren van code kwaliteit
-
----
-
-**Ontwikkeld voor Backend Web Development - Erasmushogeschool Brussel**  
-**Academiejaar 2025-2026**
