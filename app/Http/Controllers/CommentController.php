@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\NewsArticle;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CommentController extends Controller
 {
+    use AuthorizesRequests;
     public function store(Request $request, NewsArticle $article)
     {
         $validated = $request->validate([

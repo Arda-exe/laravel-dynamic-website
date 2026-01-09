@@ -37,7 +37,6 @@ Route::get('/user/{user}', [ProfileController::class, 'show'])->name('profile.sh
 // Public Forum Routes
 Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forum/category/{slug}', [ForumCategoryController::class, 'show'])->name('forum.category.show');
-Route::get('/forum/threads/{thread}', [ForumThreadController::class, 'show'])->name('forum.threads.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -49,7 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/news/{article}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
-    // Forum Thread Routes
+    // Forum Thread Routes (must be before the public thread show route)
     Route::get('/forum/threads/create', [ForumThreadController::class, 'create'])->name('forum.threads.create');
     Route::post('/forum/threads', [ForumThreadController::class, 'store'])->name('forum.threads.store');
     Route::get('/forum/threads/{thread}/edit', [ForumThreadController::class, 'edit'])->name('forum.threads.edit');
@@ -61,6 +60,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/forum/threads/{thread}/replies', [ForumReplyController::class, 'store'])->name('forum.replies.store');
     Route::delete('/forum/replies/{reply}', [ForumReplyController::class, 'destroy'])->name('forum.replies.destroy');
 });
+
+// Public forum thread show route (must be after /forum/threads/create)
+Route::get('/forum/threads/{thread}', [ForumThreadController::class, 'show'])->name('forum.threads.show');
 
 // Admin Routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
