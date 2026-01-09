@@ -13,7 +13,13 @@
 
     // If user has uploaded photo, use it; otherwise use a random default avatar
     if ($user->photo) {
-        $photoUrl = asset('storage/' . $user->photo);
+        // Check if it's a preset photo (stored in public/images)
+        if (str_starts_with($user->photo, 'images/')) {
+            $photoUrl = asset($user->photo);
+        } else {
+            // Custom uploaded photo (stored in storage)
+            $photoUrl = asset('storage/' . $user->photo);
+        }
     } else {
         // Use user ID to consistently pick the same avatar for each user
         $avatarNumber = ($user->id % 10) + 1;

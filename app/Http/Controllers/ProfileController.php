@@ -54,21 +54,38 @@ class ProfileController extends Controller
     public function updatePhoto(Request $request): RedirectResponse
     {
         $request->validate([
-            'photo' => 'required|image|mimes:jpeg,jpg,png,webp|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:4096',
+            'preset_photo' => 'nullable|string',
         ]);
 
         $user = $request->user();
 
-        // Delete old photo if exists
-        if ($user->photo) {
-            Storage::disk('public')->delete($user->photo);
+        // If a preset photo is selected
+        if ($request->filled('preset_photo')) {
+            // Delete old custom photo if exists (don't delete presets)
+            if ($user->photo && !str_starts_with($user->photo, 'images/')) {
+                Storage::disk('public')->delete($user->photo);
+            }
+            
+            $user->update(['photo' => $request->preset_photo]);
+            return Redirect::route('profile.edit')->with('success', 'Profile photo updated successfully.');
         }
 
-        // Store new photo
-        $path = $request->file('photo')->store('profile-photos', 'public');
-        $user->update(['photo' => $path]);
+        // If a custom photo is uploaded
+        if ($request->hasFile('photo')) {
+            // Delete old photo if exists and it's not a preset
+            if ($user->photo && !str_starts_with($user->photo, 'avatars/')) {
+                Storage::disk('public')->delete($user->photo);
+            }
 
-        return Redirect::route('profile.edit')->with('success', 'Profile photo updated successfully.');
+            // Store new photo
+            $path = $request->file('photo')->store('profile-photos', 'public');
+            $user->update(['photo' => $path]);
+            
+            return Redirect::route('profile.edit')->with('success', 'Profile photo updated successfully.');
+        }
+
+        return Redirect::route('profile.edit')->with('error', 'Please select a photo.');
     }
 
     /**
