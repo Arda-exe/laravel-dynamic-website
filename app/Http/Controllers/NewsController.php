@@ -16,7 +16,7 @@ class NewsController extends Controller
         $articles = NewsArticle::with('user')
             ->published()
             ->latest()
-            ->paginate(10);
+            ->paginate(9);
 
         return view('news.index', compact('articles'));
     }

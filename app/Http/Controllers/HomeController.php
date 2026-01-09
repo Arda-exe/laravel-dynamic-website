@@ -13,12 +13,12 @@ class HomeController extends Controller
         $latest_news = NewsArticle::with('user')
             ->whereNotNull('published_at')
             ->latest('published_at')
-            ->take(6)
+            ->take(3)
             ->get();
 
         $latest_threads = ForumThread::with(['user', 'category'])
             ->latest()
-            ->take(8)
+            ->take(5)
             ->get();
 
         return view('home', compact('latest_news', 'latest_threads'));
