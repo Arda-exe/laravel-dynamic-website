@@ -37,6 +37,7 @@ Route::get('/user/{user}', [ProfileController::class, 'show'])->name('profile.sh
 // Public Forum Routes
 Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forum/category/{slug}', [ForumCategoryController::class, 'show'])->name('forum.category.show');
+Route::get('/forum/threads/{thread}', [ForumThreadController::class, 'show'])->name('forum.threads.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -52,7 +53,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/forum/threads/create', [ForumThreadController::class, 'create'])->name('forum.threads.create');
     Route::post('/forum/threads', [ForumThreadController::class, 'store'])->name('forum.threads.store');
     Route::get('/forum/threads/{thread}/edit', [ForumThreadController::class, 'edit'])->name('forum.threads.edit');
-    Route::get('/forum/threads/{thread}', [ForumThreadController::class, 'show'])->name('forum.threads.show');
     Route::patch('/forum/threads/{thread}', [ForumThreadController::class, 'update'])->name('forum.threads.update');
     Route::delete('/forum/threads/{thread}', [ForumThreadController::class, 'destroy'])->name('forum.threads.destroy');
     Route::post('/forum/threads/{thread}/toggle-pin', [ForumThreadController::class, 'togglePin'])->name('forum.threads.togglePin');
