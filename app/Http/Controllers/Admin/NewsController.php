@@ -6,14 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Models\NewsArticle;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $articles = NewsArticle::with('user')->latest()->paginate(15);
-        return view('admin.news.index', compact('articles'));
+        $search = $request->input('search');
+
+        $articles = NewsArticle::with('user')
+            ->when($search, function ($query, $search) {
+                $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
+
+        return view('admin.news.index', compact('articles', 'search'));
     }
 
     public function create()

@@ -17,10 +17,20 @@ class UserController extends Controller
     /**
      * Display a listing of users.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $users = User::latest()->paginate(20);
-        return view('admin.users.index', compact('users'));
+        $search = $request->input('search');
+
+        $users = User::query()
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(20)
+            ->withQueryString();
+
+        return view('admin.users.index', compact('users', 'search'));
     }
 
     /**

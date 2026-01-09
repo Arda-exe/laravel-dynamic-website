@@ -11,6 +11,29 @@
             </a>
         </div>
 
+        <!-- Search Bar -->
+        <div class="mb-6">
+            <form method="GET" action="{{ route('admin.news.index') }}" class="flex gap-3">
+                <div class="flex-grow">
+                    <input 
+                        type="text" 
+                        name="search" 
+                        value="{{ $search ?? '' }}" 
+                        placeholder="Search by title or content..." 
+                        class="elden-input w-full px-4 py-2"
+                    >
+                </div>
+                <button type="submit" class="elden-button px-6">
+                    Search
+                </button>
+                @if($search)
+                    <a href="{{ route('admin.news.index') }}" class="px-6 py-2 bg-slate-700 text-slate-200 rounded-lg hover:bg-slate-600 transition-colors">
+                        Clear
+                    </a>
+                @endif
+            </form>
+        </div>
+
         <div class="bg-slate-900/50 border border-amber-900/30 rounded-lg overflow-hidden">
             <table class="min-w-full divide-y divide-amber-900/20">
                 <thead class="bg-slate-950/50">
