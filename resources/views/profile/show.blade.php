@@ -48,9 +48,45 @@
                 <h3 class="text-xl font-bold text-amber-400 mb-4">Recent Activity</h3>
 
                 @php
-                    $recentNews = $user->newsArticles()->latest()->take(3)->get();
-                    $recentComments = $user->comments()->with('newsArticle')->latest()->take(5)->get();
+                    $recentNews = $user->newsArticles()->latest()->take(2)->get();
+                    $recentComments = $user->comments()->with('newsArticle')->latest()->take(2)->get();
+                    $recentThreads = $user->forumThreads()->with('category')->latest()->take(2)->get();
+                    $recentReplies = $user->forumReplies()->with('thread')->latest()->take(2)->get();
                 @endphp
+
+                @if($recentThreads->isNotEmpty())
+                    <div class="mb-6">
+                        <h4 class="text-sm font-medium text-amber-400 mb-3">Recent Forum Threads</h4>
+                        <div class="space-y-2">
+                            @foreach($recentThreads as $thread)
+                                <a href="{{ route('forum.threads.show', $thread) }}"
+                                   class="block p-3 rounded bg-slate-900/30 hover:bg-slate-800/50 transition-colors border border-amber-900/20">
+                                    <p class="text-slate-200 font-medium">{{ $thread->title }}</p>
+                                    <p class="text-xs text-slate-400 mt-1">
+                                        In <span class="text-amber-400">{{ $thread->category->name }}</span> · {{ $thread->created_at->diffForHumans() }}
+                                    </p>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
+                @if($recentReplies->isNotEmpty())
+                    <div class="mb-6">
+                        <h4 class="text-sm font-medium text-amber-400 mb-3">Recent Forum Replies</h4>
+                        <div class="space-y-2">
+                            @foreach($recentReplies as $reply)
+                                <a href="{{ route('forum.threads.show', $reply->thread) }}#reply-{{ $reply->id }}"
+                                   class="block p-3 rounded bg-slate-900/30 hover:bg-slate-800/50 transition-colors border border-amber-900/20">
+                                    <p class="text-slate-300 text-sm">{{ Str::limit($reply->content, 100) }}</p>
+                                    <p class="text-xs text-slate-400 mt-1">
+                                        On <span class="text-amber-400">{{ $reply->thread->title }}</span> · {{ $reply->created_at->diffForHumans() }}
+                                    </p>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
 
                 @if($recentNews->isNotEmpty())
                     <div class="mb-6">
@@ -84,7 +120,7 @@
                     </div>
                 @endif
 
-                @if($recentNews->isEmpty() && $recentComments->isEmpty())
+                @if($recentNews->isEmpty() && $recentComments->isEmpty() && $recentThreads->isEmpty() && $recentReplies->isEmpty())
                     <p class="text-slate-400 text-center py-8">No recent activity</p>
                 @endif
             </div>
