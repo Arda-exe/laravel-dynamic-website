@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\FaqCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class FaqCategoryController extends Controller
@@ -42,7 +41,6 @@ class FaqCategoryController extends Controller
 
         FaqCategory::create([
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
             'description' => $request->description,
             'order' => $request->order,
         ]);
@@ -73,7 +71,6 @@ class FaqCategoryController extends Controller
 
         $faqCategory->update([
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
             'description' => $request->description,
             'order' => $request->order,
         ]);
