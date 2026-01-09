@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ForumCategorySeeder::class,
             ForumThreadSeeder::class,
             ForumReplySeeder::class,
+            ContactSubmissionSeeder::class,
         ]);
     }
 }

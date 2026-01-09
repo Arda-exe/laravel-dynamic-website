@@ -12,96 +12,105 @@ class ForumThreadSeeder extends Seeder
 {
     public function run(): void
     {
-        $admin = User::where('email', 'admin@ehb.be')->first();
-        $users = User::where('email', '!=', 'admin@ehb.be')->take(3)->get();
+        $users = User::where('role', 'user')->get();
+        $admins = User::where('role', 'admin')->get();
+        
+        $categories = ForumCategory::all();
 
-        $generalDiscussion = ForumCategory::where('slug', 'general-discussion')->first();
-        $bossStrategies = ForumCategory::where('slug', 'boss-strategies')->first();
-        $buildDiscussions = ForumCategory::where('slug', 'build-discussions')->first();
-        $loreTheories = ForumCategory::where('slug', 'lore-theories')->first();
+        $threadsByCategory = [
+            'general-discussion' => [
+                ['title' => 'What Was Your "Oh, This Game Hates Me" Moment?', 'content' => 'Share your first reality check in Elden Ring. For me, it was the Tree Sentinel right out of the gate.', 'pinned' => false],
+                ['title' => 'Favorite Area in the Game and Which One Do You Hate?', 'content' => 'Limgrave is beautiful, Caelid is cursed. What about you?', 'pinned' => false],
+                ['title' => 'How Many Hours Did Your First Playthrough Take?', 'content' => 'I just hit 120 hours and still discovering new areas. Anyone else?', 'pinned' => false],
+                ['title' => 'Best NPC Questlines in Elden Ring', 'content' => 'Ranni\'s quest was amazing but Alexander\'s story hit different. Thoughts?', 'pinned' => false],
+                ['title' => 'Torrent Appreciation Thread', 'content' => 'Can we talk about how essential our horse companion is? Best mount in any game.', 'pinned' => false],
+                ['title' => 'What Level Are You Stopping At?', 'content' => 'Trying to figure out the PvP meta level. Is 150 still the sweet spot?', 'pinned' => false],
+                ['title' => 'Elden Ring vs Other FromSoft Games', 'content' => 'How does it compare to Dark Souls or Bloodborne for you?', 'pinned' => false],
+                ['title' => 'Most Unexpected Death Compilation', 'content' => 'Share your dumbest deaths. Mine was rolling off a cliff while fighting a rat.', 'pinned' => false],
+                ['title' => 'Tips for New Players Starting Out', 'content' => 'What do you wish you knew when you started?', 'pinned' => true],
+                ['title' => 'Elden Ring Soundtrack Appreciation', 'content' => 'The boss music in this game is phenomenal. Favorite tracks?', 'pinned' => false],
+                ['title' => 'How Do You Deal With Invasion Anxiety?', 'content' => 'Getting invaded stresses me out. Any tips for handling PvP better?', 'pinned' => false],
+                ['title' => 'Found a Secret Area After 200 Hours', 'content' => 'Just discovered Mohgwyn Palace. How did I miss this?!', 'pinned' => false],
+                ['title' => 'Best Weapons for Fashion Souls', 'content' => 'What weapons look the coolest? Stats be damned.', 'pinned' => false],
+                ['title' => 'Challenge Run Ideas', 'content' => 'Looking for fun challenge runs. Already done level 1. What else?', 'pinned' => false],
+                ['title' => 'Favorite Boss Intro Cutscene', 'content' => 'Radahn riding in on that tiny horse will never not be funny.', 'pinned' => false],
+            ],
+            'boss-strategies' => [
+                ['title' => 'Be Honest — How Did You Beat Malenia?', 'content' => 'Stuck on Malenia. Real strategies only please. Did you use Mimic Tear?', 'pinned' => true],
+                ['title' => 'Margit Tips for New Players', 'content' => 'Beginner-friendly strategies for the first major roadblock.', 'pinned' => false],
+                ['title' => 'Radahn Strategy Without Horse', 'content' => 'Is it even possible to beat him on foot effectively?', 'pinned' => false],
+                ['title' => 'Fire Giant Cheese Methods', 'content' => 'This boss is tedious. Anyone know good strategies?', 'pinned' => false],
+                ['title' => 'Godskin Duo Solo Guide', 'content' => 'Trying to beat them without summons. Send help.', 'pinned' => false],
+                ['title' => 'Mohg Lord of Blood Bleed Resistance', 'content' => 'How do you deal with his blood attacks?', 'pinned' => false],
+                ['title' => 'Maliketh Phase 2 Timing Help', 'content' => 'His attacks are so fast! When do I punish?', 'pinned' => false],
+                ['title' => 'Elden Beast Final Boss Tips', 'content' => 'Running simulator 2022. How do you catch this thing?', 'pinned' => false],
+                ['title' => 'Rykard Easy Mode Strategy', 'content' => 'Serpent-Hunter makes this fight trivial but still fun.', 'pinned' => false],
+                ['title' => 'Dragonlord Placidusax Location', 'content' => 'Where exactly do I find this hidden boss?', 'pinned' => false],
+                ['title' => 'Astel Naturalborn of the Void Tips', 'content' => 'These grab attacks are insane. Dodging help?', 'pinned' => false],
+                ['title' => 'Commander Niall Summons Counter', 'content' => 'The dual sword summon keeps destroying me.', 'pinned' => false],
+                ['title' => 'Loretta Knight of the Haligtree', 'content' => 'Magic build strategies for this fight?', 'pinned' => false],
+            ],
+            'build-discussions' => [
+                ['title' => 'Are Pure Strength Builds Actually Good?', 'content' => 'Debating whether to stick with STR or go quality build.', 'pinned' => false],
+                ['title' => 'Most Fun Build You\'ve Played', 'content' => 'Not the best, but the most enjoyable build.', 'pinned' => false],
+                ['title' => 'Best Bleed Build Post-Nerf', 'content' => 'Rivers of Blood got nerfed. What\'s still viable?', 'pinned' => false],
+                ['title' => 'Pure Caster Viability Discussion', 'content' => 'Can you beat the game as a pure INT build?', 'pinned' => false],
+                ['title' => 'Arcane Build Guide 2024', 'content' => 'Comprehensive arcane build with weapon recommendations.', 'pinned' => true],
+                ['title' => 'Faith/Strength Paladin Build', 'content' => 'Best incantations and weapons for a holy warrior.', 'pinned' => false],
+                ['title' => 'Dual Wielding Pros and Cons', 'content' => 'Power stance builds vs shield builds discussion.', 'pinned' => false],
+                ['title' => 'Best Starting Class for Beginners', 'content' => 'Which class gives the easiest early game?', 'pinned' => false],
+                ['title' => 'Endgame Stat Distribution', 'content' => 'Where should my stats be at level 150?', 'pinned' => false],
+                ['title' => 'Dragon Communion Build', 'content' => 'Using all the dragon incantations. Is it worth it?', 'pinned' => false],
+                ['title' => 'Sorcery Spell Tier List', 'content' => 'Ranking all sorceries from best to worst.', 'pinned' => false],
+                ['title' => 'Best Weapons for Quality Build', 'content' => 'STR/DEX equal investment weapon recommendations.', 'pinned' => false],
+                ['title' => 'Sleep Build Experimentation', 'content' => 'Has anyone made a sleep status effect build work?', 'pinned' => false],
+                ['title' => 'Perfumer Build Discussion', 'content' => 'Using perfume items as main damage source.', 'pinned' => false],
+            ],
+            'lore-theories' => [
+                ['title' => 'Marika and Radagon Same Person Theory', 'content' => 'Evidence that they were always one being.', 'pinned' => false],
+                ['title' => 'What Happened to Godwyn', 'content' => 'The Prince of Death lore deep dive.', 'pinned' => false],
+                ['title' => 'Miquella\'s Plan Explained', 'content' => 'Was the Haligtree actually meant to save the world?', 'pinned' => false],
+                ['title' => 'The Greater Will vs Outer Gods', 'content' => 'Understanding the cosmic forces at play.', 'pinned' => true],
+                ['title' => 'Why Did the Shattering Happen', 'content' => 'What was Marika\'s true motivation?', 'pinned' => false],
+                ['title' => 'Ranni\'s Age of Stars Ending Analysis', 'content' => 'What does her ending actually mean for the world?', 'pinned' => false],
+                ['title' => 'Connection to Dark Souls Lore', 'content' => 'Easter eggs and potential shared universe theories.', 'pinned' => false],
+                ['title' => 'Who is the Gloam-Eyed Queen', 'content' => 'Theories about this mysterious figure.', 'pinned' => false],
+                ['title' => 'Melina Identity Theory', 'content' => 'Is she really connected to Marika?', 'pinned' => false],
+                ['title' => 'Outer God of Rot Origin', 'content' => 'Malenia and the Scarlet Rot explained.', 'pinned' => false],
+                ['title' => 'Farum Azula Time Loop Theory', 'content' => 'Is this area outside of time itself?', 'pinned' => false],
+                ['title' => 'Numen People Origins', 'content' => 'Where did Marika\'s people come from?', 'pinned' => false],
+            ],
+        ];
 
-        // General Discussion Threads
-        $title = 'What Was Your "Oh, This Game Hates Me" Moment?';
-        ForumThread::create([
-            'forum_category_id' => $generalDiscussion->id,
-            'user_id' => $users[0]->id ?? $admin->id,
-            'title' => $title,
-            'slug' => Str::slug($title),
-            'content' => "What was the exact moment Elden Ring made you realize it wasn't messing around?\n\nFor me, it was walking straight up to the Tree Sentinel right after the tutorial because I assumed that's what you're supposed to do. Got absolutely deleted in seconds and learned my first lesson: just because you can fight something doesn't mean you should.\n\nWas it a boss, an area you wandered into way too early, or some random enemy that humbled you out of nowhere? Bonus points if you kept retrying instead of leaving like a sensible Tarnished.",
-            'is_pinned' => false,
-        ]);
+        foreach ($categories as $category) {
+            $threads = $threadsByCategory[$category->slug] ?? [];
+            $threadCount = rand(10, 25);
+            
+            // Add more generic threads if needed
+            while (count($threads) < $threadCount) {
+                $threads[] = [
+                    'title' => 'Discussion about ' . $category->name . ' #' . (count($threads) + 1),
+                    'content' => 'General discussion thread for ' . $category->name,
+                    'pinned' => false
+                ];
+            }
 
-        $title = 'What\'s Your Favorite Area in the Game (and Which One Do You Hate)?';
-        ForumThread::create([
-            'forum_category_id' => $generalDiscussion->id,
-            'user_id' => $users[1]->id ?? $admin->id,
-            'title' => $title,
-            'slug' => Str::slug($title),
-            'content' => "Every playthrough, there's at least one area I'm excited to reach and one I'm dreading.\n\nI love Limgrave for the vibes and freedom, but Caelid still stresses me out every single time. Doesn't matter how geared I am — that place feels cursed.\n\nWhat's your favorite region and why? And be honest: which area do you sprint through just to get it over with?",
-            'is_pinned' => false,
-        ]);
+            foreach (array_slice($threads, 0, $threadCount) as $threadData) {
+                $user = $users->random();
+                if ($threadData['pinned'] ?? false) {
+                    $user = $admins->random();
+                }
 
-        // Boss Strategies Threads
-        $title = 'Be Honest — How Did You Actually Beat Malenia?';
-        ForumThread::create([
-            'forum_category_id' => $bossStrategies->id,
-            'user_id' => $users[2]->id ?? $admin->id,
-            'title' => $title,
-            'slug' => Str::slug($title),
-            'content' => "Alright, I'm officially stuck on Malenia and starting to question my build, my reflexes, and my life choices.\n\nHow did you beat her for real? Not \"just dodge better,\" but actual strategies that worked for you.\nDid you respec? Abuse bleed? Use Mimic Tear? Summon help and feel zero shame?\n\nAny tips for dealing with Waterfowl Dance without instantly dying would be appreciated. I'm open to anything at this point.",
-            'is_pinned' => true,
-        ]);
-
-        $title = 'New Players Keep Bouncing Off Margit — What\'s Your Advice?';
-        ForumThread::create([
-            'forum_category_id' => $bossStrategies->id,
-            'user_id' => $admin->id,
-            'title' => $title,
-            'slug' => Str::slug($title),
-            'content' => "I keep seeing new players get hard-stuck on Margit and assume the game just isn't for them.\n\nWhat would you tell someone struggling here? Should they explore more first, grab specific gear, or lean heavily on summons? Any ashes of war or spirit ashes that make this fight way easier?\n\nDrop your best beginner-friendly tips so future Tarnished don't uninstall at Stormveil.",
-            'is_pinned' => false,
-        ]);
-
-        // Build Discussions Threads
-        $title = 'Are Pure Strength Builds Actually Good or Am I Coping?';
-        ForumThread::create([
-            'forum_category_id' => $buildDiscussions->id,
-            'user_id' => $users[0]->id ?? $admin->id,
-            'title' => $title,
-            'slug' => Str::slug($title),
-            'content' => "With all the crazy stuff in Elden Ring — bleed, magic, hybrids, ashes of war — I'm wondering how pure Strength builds really stack up.\n\nDo colossal weapons still feel worth it late game, or do they just get you killed faster? Is going STR/FAI or STR/INT basically mandatory now?\n\nIf you're running a Strength build that actually works, please share what you're using before I respec out of spite.",
-            'is_pinned' => false,
-        ]);
-
-        $title = 'What\'s the Most Fun Build You\'ve Played (Not Necessarily the Best)?';
-        ForumThread::create([
-            'forum_category_id' => $buildDiscussions->id,
-            'user_id' => $users[1]->id ?? $admin->id,
-            'title' => $title,
-            'slug' => Str::slug($title),
-            'content' => "Forget the meta for a second — what's the build you had the most fun with?\n\nCould be off-meta, thematic, or just dumb but effective. How did it perform in PvE and PvP? Did it fall apart late game or surprise you by staying viable?\n\nLooking for ideas for a new run and would love to steal something cool.",
-            'is_pinned' => false,
-        ]);
-
-        // Lore & Theories Threads
-        $title = 'What Does the Greater Will Actually Want?';
-        ForumThread::create([
-            'forum_category_id' => $loreTheories->id,
-            'user_id' => $users[2]->id ?? $admin->id,
-            'title' => $title,
-            'slug' => Str::slug($title),
-            'content' => "We hear about the Greater Will constantly, but it's still weirdly vague about what it actually wants from the Lands Between.\n\nIs it genuinely about order and stability, or is it just another outer god using the world for its own ends? How do the different endings change (or reinforce) its influence?\n\nWould love to hear theories backed by item descriptions, dialogue, or environmental storytelling.",
-            'is_pinned' => false,
-        ]);
-
-        $title = 'So… What\'s the Deal With Marika and Radagon?';
-        ForumThread::create([
-            'forum_category_id' => $loreTheories->id,
-            'user_id' => $admin->id,
-            'title' => $title,
-            'slug' => Str::slug($title),
-            'content' => "The game straight-up tells us Marika and Radagon are the same being, but their actions feel completely at odds with each other.\n\nAre they two sides of the same god? Did Radagon exist separately at first? Or is this some kind of divine coping mechanism gone wrong?\n\nCurious how everyone else interprets this, especially if you've dug deep into item descriptions or ending details.",
-            'is_pinned' => false,
-        ]);
+                ForumThread::create([
+                    'forum_category_id' => $category->id,
+                    'user_id' => $user->id,
+                    'title' => $threadData['title'],
+                    'slug' => Str::slug($threadData['title']),
+                    'content' => $threadData['content'],
+                    'is_pinned' => $threadData['pinned'] ?? false,
+                    'created_at' => now()->subDays(rand(1, 60)),
+                ]);
+            }
+        }
     }
 }

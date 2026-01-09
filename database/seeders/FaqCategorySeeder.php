@@ -33,6 +33,16 @@ class FaqCategorySeeder extends Seeder
                 'description' => 'Guides and tips for defeating challenging bosses',
                 'order' => 4,
             ],
+            [
+                'name' => 'Locations & Exploration',
+                'description' => 'Discover secrets and navigate the Lands Between',
+                'order' => 5,
+            ],
+            [
+                'name' => 'Multiplayer & Co-op',
+                'description' => 'Everything about online play and cooperation',
+                'order' => 6,
+            ],
         ];
 
         foreach ($categories as $category) {

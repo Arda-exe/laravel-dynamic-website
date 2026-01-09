@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('forum_category_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->text('content');
             $table->boolean('is_pinned')->default(false);
             $table->boolean('is_locked')->default(false);
