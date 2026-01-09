@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\ForumCategory;
 use App\Models\ForumThread;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ForumThreadController extends Controller
 {
+    use AuthorizesRequests;
     public function create(Request $request): View
     {
         $categorySlug = $request->query('category');
@@ -81,5 +83,17 @@ class ForumThreadController extends Controller
 
         return redirect()->route('forum.category.show', $categorySlug)
             ->with('success', 'Thread deleted successfully.');
+    }
+
+    public function togglePin(ForumThread $thread): RedirectResponse
+    {
+        $this->authorize('pin', $thread);
+
+        $thread->update(['is_pinned' => !$thread->is_pinned]);
+
+        $message = $thread->is_pinned ? 'Thread pinned successfully.' : 'Thread unpinned successfully.';
+
+        return redirect()->route('forum.threads.show', $thread)
+            ->with('success', $message);
     }
 }

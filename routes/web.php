@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/forum/threads/{thread}/edit', [ForumThreadController::class, 'edit'])->name('forum.threads.edit');
     Route::patch('/forum/threads/{thread}', [ForumThreadController::class, 'update'])->name('forum.threads.update');
     Route::delete('/forum/threads/{thread}', [ForumThreadController::class, 'destroy'])->name('forum.threads.destroy');
+    Route::post('/forum/threads/{thread}/toggle-pin', [ForumThreadController::class, 'togglePin'])->name('forum.threads.togglePin');
 
     // Forum Reply Routes
     Route::post('/forum/threads/{thread}/replies', [ForumReplyController::class, 'store'])->name('forum.replies.store');

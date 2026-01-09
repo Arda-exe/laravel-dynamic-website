@@ -1,5 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
+        @if($thread->is_pinned)
+            <span class="text-amber-600">📌</span>
+        @endif
+        @if($thread->is_locked)
+            <span class="text-slate-500">🔒</span>
+        @endif
         {{ $thread->title }}
     </x-slot>
 
@@ -31,6 +37,15 @@
                         @auth
                             @if(auth()->id() === $thread->user_id || auth()->user()->isAdmin())
                                 <div class="flex items-center gap-2">
+                                    @if(auth()->user()->isAdmin())
+                                        <form method="POST" action="{{ route('forum.threads.togglePin', $thread) }}" class="inline">
+                                            @csrf
+                                            <button type="submit" class="text-amber-400 hover:text-amber-300 text-sm">
+                                                {{ $thread->is_pinned ? '📌 Unpin' : '📌 Pin' }}
+                                            </button>
+                                        </form>
+                                        <span class="text-slate-600">|</span>
+                                    @endif
                                     <a href="{{ route('forum.threads.edit', $thread) }}" class="text-amber-400 hover:text-amber-300 text-sm">
                                         Edit
                                     </a>
